@@ -1,11 +1,19 @@
 # モールス
 morse_japanese = {'ア': '--.--', 'イ': '.-', 'ウ': '..-', 'エ': '-.---', 'オ': '.-...', 'カ': '.-..', 'キ': '-.-..', 'ク': '...-', 'ケ': '-.--', 'コ': '----', 'サ': '-.-.-', 'シ': '--.-.', 'ス': '---.-', 'セ': '.---.', 'ソ': '---.', 'タ': '-.', 'チ': '..-.', 'ツ': '.--.', 'テ': '.-.--', 'ト': '..-..', 'ナ': '.-.', 'ニ': '-.-.', 'ヌ': '....', 'ネ': '--.-', 'ノ': '..--', 'ハ': '-...', 'ヒ': '--..-', 'フ': '--..', 'ヘ': '.', 'ホ': '-..', 'マ': '-..-', 'ミ': '..-.-', 'ム': '-', 'メ': '-...-', 'モ': '-..-.', 'ヤ': '.--', '': '', 'ユ': '-..--', 'ヨ': '--', 'ラ': '...', 'リ': '--.', 'ル': '-.--.', 'レ': '---', 'ロ': '.-.-', 'ワ': '-.-', 'ヰ': '.-..-', 'ヱ': '.--..', 'ヲ': '.---', 'ン': '.-.-.', 'ー': '.--.-', '゛': '..', '゜': '..--.', '、': '.-.-.-'}
 
+mmnk = "うんち"
+
 # dfs
 def morse(crypto, answer):
-    for key, value in morse_japanese.items():
-        print(key)
-        print(value)
+    if crypto == "":
+        print(answer)
+        return True
+    for c, tontsu in morse_japanese.items():
+        if len(crypto) >= len(tontsu):
+            ansplus = answer + c
+            if morse(crypto[len(tontsu):], ansplus):
+                return True
+    return False
 
 # 入力
 print("Please input the Cryptography: ")
@@ -37,8 +45,5 @@ if isJapanese == "n" or isJapanese == "N" or isJapanese == "false" or isJapanese
 # 間違えたら戻る。
 
 ans = ""
-morse(aisu, ans)
-
-# 出力
-
-print(ans)
+if not morse(aisu, ans):
+    print("変換できなかった")
