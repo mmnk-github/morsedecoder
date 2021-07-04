@@ -1,4 +1,4 @@
-# morse-decoder
+# morsedecoder
 区切り文字が無いモールス信号（日本語）をなんとか復号します。
 
 # つかいかた
