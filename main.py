@@ -64,7 +64,7 @@ if ton == tsu:
 morse_japanese = replace_morse(ton, tsu)
 
 # 日本語ですか？
-print("This is Japanese? (Y/n): ")
+print("Is this Japanese? (Y/n): ")
 isJapanese = input()
 if isJapanese == "n" or isJapanese == "N" or isJapanese == "false" or isJapanese == "False" or isJapanese == "FALSE":
     # fuck
