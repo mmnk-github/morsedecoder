@@ -1,9 +1,11 @@
 # モールス
+chosen_morse = {}
 morse_japanese = {'ア': '--.--', 'イ': '.-', 'ウ': '..-', 'エ': '-.---', 'オ': '.-...', 'カ': '.-..', 'キ': '-.-..', 'ク': '...-', 'ケ': '-.--', 'コ': '----', 'サ': '-.-.-', 'シ': '--.-.', 'ス': '---.-', 'セ': '.---.', 'ソ': '---.', 'タ': '-.', 'チ': '..-.', 'ツ': '.--.', 'テ': '.-.--', 'ト': '..-..', 'ナ': '.-.', 'ニ': '-.-.', 'ヌ': '....', 'ネ': '--.-', 'ノ': '..--', 'ハ': '-...', 'ヒ': '--..-', 'フ': '--..', 'ヘ': '.', 'ホ': '-..', 'マ': '-..-', 'ミ': '..-.-', 'ム': '-', 'メ': '-...-', 'モ': '-..-.', 'ヤ': '.--', 'ユ': '-..--', 'ヨ': '--', 'ラ': '...', 'リ': '--.', 'ル': '-.--.', 'レ': '---', 'ロ': '.-.-', 'ワ': '-.-',  'ヲ': '.---', 'ン': '.-.-.', 'ー': '.--.-', '゛': '..', '゜': '..--.', '、': '.-.-.-'}
+morse_english = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----'}
 
 def replace_morse(ton, tsu):
     new_dict = {}
-    for c, tontsu in morse_japanese.items():
+    for c, tontsu in chosen_morse.items():
         new_tontsu = ""
         for t in tontsu:
             if t == '-':
@@ -23,7 +25,7 @@ def dfs(crypto, answer):
     if crypto == "":
         print(answer)
         return 1
-    for c, tontsu in morse_japanese.items():
+    for c, tontsu in chosen_morse.items():
         if len(crypto) >= len(tontsu):
             if crypto[:len(tontsu)] == tontsu:
                 ansplus = answer + c
@@ -60,11 +62,18 @@ if ton == tsu:
 morse_japanese = replace_morse(ton, tsu)
 
 # 日本語ですか？
-print("Is this Japanese? (Y/n): ")
-isJapanese = input()
-if isJapanese == "n" or isJapanese == "N" or isJapanese == "false" or isJapanese == "False" or isJapanese == "FALSE":
+print("日本語：1, English：2")
+chosen_language = input()
+if chosen_language == "1":
+    # 日本語
+    chosen_morse = morse_japanese
+elif chosen_language == "2":
+    # English
+    chosen_morse = morse_english
+else:
     # fuck
     print("fuck")
+    exit(0)
 
 # 貪欲に当てていく。
 # 間違えたら戻る。
